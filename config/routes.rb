@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "users#index"
+
+  scope :supervisor do
+    resources :users
+    resources :tasks, except: :show
+    resources :subjects, except: :show
+    resources :courses, except: :show
+  end
 end

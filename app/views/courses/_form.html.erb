@@ -1,0 +1,40 @@
+<%= form_for @course do |f| %>
+  <%= render "layouts/shared/error_message", object: f.object %>
+  <div class="form-group row">
+    <%= f.label :name, class: "col-sm-4 form-control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= f.label :description, class: "col-sm-4 form-control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= f.label :duration, class: "col-sm-4 form-control-label" %>
+    <div class="col-sm-8">
+      <%= f.number_field :duration, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= f.label :duration_type, class: "col-sm-4 form-control-label" %>
+    <div class="col-sm-8">
+      <%= f.select(:duration_type, Course.duration_types_i18n, {},
+        {class: "form-control"}) %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :picture, class: "col-sm-4 form-control-label" %>
+    <div class="col-sm-8">
+      <%= f.file_field :picture %>
+      <%= image_tag f.object.picture.url, alt: f.object.name,
+        class: "img-circle avatar-update-size" if f.object.picture.url %>
+    </div>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

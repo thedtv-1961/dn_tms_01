@@ -1,0 +1,75 @@
+<% provide :title, t("page.subject_list") %>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped verticalalign">
+      <h3><%= t "page.subject_list" %></h3>
+      <div id="showmsg"></div>
+      <%= link_to t("page.subject_list"), new_subject_path, class: "btn btn-success" %>
+      <thead>
+      <tr>
+        <th><%= t "table.column.order" %></th>
+        <th><%= t "table.column.picture" %></th>
+        <th><%= t "table.column.name" %></th>
+        <th><%= t "table.column.action" %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @subjects.each_with_index do |subject, index| %>
+        <tr id="data-row-id-<%= subject.id %>">
+          <td scope="row"><strong><%= index + 1 %></strong></td>
+          <td>
+            <% if subject.picture %>
+              <%= link_to image_tag(subject.picture.thumb.url, alt: subject.name,
+                class: "img-circle avatar-size"), edit_subject_path(subject) %>
+            <% else %>
+              <%= link_to image_tag(Settings.avatar_default,
+                alt: t("messages.no_picture"), class: "img-circle avatar-size"),
+                edit_subject_path(subject) %>
+            <% end %>
+          </td>
+          <td><%= link_to subject.name, edit_subject_path(subject) %></td>
+          <td>
+            <%= link_to edit_subject_path(subject), class: "btn btn-warning" do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+            <button href="#myModal" class="btn btn-danger btn-load-modal"
+              data-id="<%= subject.id %>" data-toggle="modal">
+              <span class="fa fa-remove"></span>
+            </button>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate %>
+  </div>
+</div>
+
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="icon-box">
+          <i class="fa fa-remove"></i>
+        </div>
+        <h4 class="modal-title"><%= t "messages.destroy_confirm" %></h4>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><%= t "messages.delete_msg" %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          <%= t "ui_control_text_js.cancel" %>
+        </button>
+        <button type="button" id="btn-delete" class="btn btn-danger">
+          <%= t "ui_control_text_js.delete" %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "ajax_helper" %>

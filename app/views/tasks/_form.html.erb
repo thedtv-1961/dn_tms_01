@@ -1,0 +1,11 @@
+<%= form_for @task do |f| %>
+  <%= render "layouts/shared/error_message", object: f.object %>
+  <div class="form-group row">
+    <%= f.label :name, class: "col-sm-4 form-control-label" %>
+    <div class="col-sm-8">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
