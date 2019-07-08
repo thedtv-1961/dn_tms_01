@@ -1,0 +1,7 @@
+<div class="row subject">
+  <label for="">Subject:</label>
+  <%= f.hidden_field :_destroy %>
+  <%= f.select :subject_id, @subjects.collect {|sub| [sub.name, sub.id] }, {}, {class: "form-control select-subject"} %>
+  <%= link_to fa_icon("trash", text: ""), nil, class: "remove_record btn btn-danger" %>
+
+</div>
