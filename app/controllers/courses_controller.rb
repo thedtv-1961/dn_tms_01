@@ -8,9 +8,13 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    @course.course_subjects.new
+
+    @subjects = Subject.newest
   end
 
   def create
+    @subjects = Subject.newest
     @course = Course.new course_params
     if @course.save
       flash[:success] = t "messages.save_success"
@@ -20,7 +24,10 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit;
+    @course = Course.find_by id: params[:id]
+    @subjects = Subject.newest
+  end
 
   def update
     if @course.update_attributes course_params
@@ -43,7 +50,9 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit :name, :description, :duration,
-      :duration_type, :picture
+      :duration_type, :picture,
+      course_subjects_attributes: [:id, :course_id, :subject_id,
+      :status, :_destroy]
   end
 
   def load_course

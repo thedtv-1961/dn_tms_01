@@ -5,7 +5,7 @@
     <table class="table table-striped verticalalign">
       <h3><%= t "page.course_list" %></h3>
       <div id="showmsg"></div>
-      <%= link_to t("page.course_create"), new_course_path, class: "btn btn-success" %>
+      <%= link_to t("page.course_create"), new_course_path, data: { turbolinks: false } , class: "btn btn-success" %>
       <thead>
       <tr>
         <th><%= t "table.column.order" %></th>
@@ -19,18 +19,12 @@
         <tr id="data-row-id-<%= course.id %>">
           <td scope="row"><strong><%= index + 1 %></strong></td>
           <td>
-            <% if course.picture %>
-              <%= link_to image_tag(course.picture.thumb.url, alt: course.name,
-                class: "img-circle avatar-size"), edit_course_path(course) %>
-            <% else %>
-              <%= link_to image_tag(Settings.avatar_default,
-                alt: t("messages.no_picture"), class: "img-circle avatar-size"),
-                  edit_course_path(course)  %>
-            <% end %>
+            <%= link_to image_tag(course.picture.url, alt: course.name, data: { turbolinks: false },
+            class: "img-circle avatar-size"), edit_course_path(course) %>
           </td>
-          <td><%= link_to course.name, edit_course_path(course)  %></td>
+          <td><%= link_to course.name, edit_course_path(course), data: { turbolinks: false } %></td>
           <td>
-            <%= link_to edit_course_path(course), class: "btn btn-warning" do %>
+            <%= link_to edit_course_path(course), data: { turbolinks: false }, class: "btn btn-warning" do %>
               <i class="fa fa-edit"></i>
             <% end %>
             <button href="#myModal" class="btn btn-danger btn-load-modal"

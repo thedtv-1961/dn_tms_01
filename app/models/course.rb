@@ -1,8 +1,10 @@
 class Course < ApplicationRecord
   enum duration_types: {hour: 0, day: 1, month: 2}
 
-  has_many :course_users
-  has_many :course_subjects
+  # has_many :course_users
+  has_many :course_subjects, dependent: :destroy
+
+  accepts_nested_attributes_for :course_subjects, allow_destroy: true
 
   validates :name, presence: true,
     length: {maximum: Settings.name_length_maximum}
