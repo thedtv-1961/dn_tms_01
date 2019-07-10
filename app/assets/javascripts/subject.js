@@ -1,18 +1,18 @@
 $(document).ready(function() {
-  $('.subject .select-subject').select2();
+  $('.tasks .select-task').select2();
 
   $('form').on('click', '.add_fields', function (event) {
     let regexp, time;
     time = new Date().getTime();
     regexp = new RegExp($(this).data('id'), 'g');
-    $('.course-subjects .panel-body').append($(this).data('fields').replace(regexp, time));
-    $('select.select-subject').select2();
+    $('.subject-tasks .panel-body').append($(this).data('fields').replace(regexp, time));
+    $('select.select-task').select2();
     return event.preventDefault();
   });
 
   $('form').on('click', '.remove_record', function (event) {
     $(this).siblings('input[type=hidden]').val('1');
-    $(this).closest('.subject').hide();
+    $(this).closest('.task').hide();
     return event.preventDefault();
   });
 
@@ -28,8 +28,7 @@ $(document).ready(function() {
     }
   }
 
-  $("#course_picture").change(function() {
+  $("#subject_picture").change(function() {
     readURL(this);
   });
 });
-

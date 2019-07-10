@@ -1,6 +1,9 @@
 class Subject < ApplicationRecord
-  has_many :course_subjects
-  has_many :subject_tasks
+  has_many :course_subjects, dependent: :destroy
+  has_many :subject_tasks, dependent: :destroy
+
+  accepts_nested_attributes_for :course_subjects, allow_destroy: true
+  accepts_nested_attributes_for :subject_tasks, allow_destroy: true
 
   validates :name, presence: true,
     length: {maximum: Settings.name_length_maximum}

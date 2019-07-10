@@ -1,4 +1,5 @@
 <% provide :title, t("page.subject_create") %>
+<%= stylesheet_link_tag "subject" %>
 
 <div class="row">
   <h1 class="text-center"><%= t("page.subject_create") %></h1>
@@ -6,3 +7,5 @@
     <%= render "subjects/form" %>
   </div>
 </div>
+
+<%= javascript_include_tag "subject" %>

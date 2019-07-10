@@ -1,11 +1,8 @@
 module CoursesHelper
-  def link_to_add_row name, f, association, **args
-    new_object = f.object.send(association).klass.new
-    id = new_object.object_id
-    fields = f.fields_for(association, new_object, child_index: id) do |builder|
-      render association.to_s.singularize, f: builder
-    end
-    link_to name, "", class: "add_fields " + args[:class],
-      data: {id: id, fields: fields.gsub("\n", "")}
+  def display_error(field, custom_field_name = nil)
+    return unless @course.errors[field].present?
+    name = custom_field_name ? custom_field_name : field.to_s.titlecase
+    raw "<span class=\"error_message\">  #{name}
+      #{@course.errors[field].first}</span>"
   end
 end

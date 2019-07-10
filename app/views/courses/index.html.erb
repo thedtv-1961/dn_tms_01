@@ -17,7 +17,7 @@
       <tbody>
       <% @courses.each_with_index do |course, index| %>
         <tr id="data-row-id-<%= course.id %>">
-          <td scope="row"><strong><%= index + 1 %></strong></td>
+          <td scope="row"><strong><%= index_number index, params[:page] %></strong></td>
           <td>
             <%= link_to image_tag(course.picture.url, alt: course.name, data: { turbolinks: false },
             class: "img-circle avatar-size"), edit_course_path(course) %>

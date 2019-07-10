@@ -1,36 +1,49 @@
 <%= form_for @course do |f| %>
-  <div class="form-group">
+  <div class="image-upload col-md-2 col-md-offset-4">
+    <div class="image-edit">
+      <%= f.file_field :picture, class: "form-control", accept: Settings.images_types.collect {|type| ".#{type},"} %>
+      <label for="course_picture"></label>
+    </div>
+    <div class="picture-preview">
+      <div id="picture-preview" style="background-image: url('<%= f.object.picture.url %>')">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
     <label>Course</label>
     <%= f.text_field :name, class: "form-control" %>
+    <%= display_error :name %>
   </div>
-  <div class="form-group">
+  <div class="col-md-6">
+    <label for="">Duration</label>
+    <%= f.select :duration_type, Course.duration_types_i18n, {}, {class: "form-control"} %>
+  </div>
+  <div class="col-md-6">
+    <label for="">Duration Type</label>
+    <%= f.text_field :duration, class: "form-control", type: "number" %>
+    <%= display_error :duration %>
+  </div>
+  <div class="col-md-12">
     <label>Description</label>
-    <%= f.text_area :description, cols: 30, rows: 2, class: "form-control" %>
+    <%= f.text_area :description, cols: 30, rows: 4, class: "form-control" %>
+    <%= display_error :description %>
   </div>
-  <div class="form-group">
-    <div class="col-md-2"><label for="">Duration :</label></div>
-    <div class="col-md-5">
-      <%= f.select :duration_type, Course.duration_types_i18n, {}, {class: "form-control"} %>
-    </div>
-    <div class="col-md-5">
-      <%= f.text_field :duration, class: "form-control", type: "number" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.file_field :picture, class: "form-control" %>
-    <%= image_tag(f.object.picture.url, alt: "Course",
-      class: "img-circle avatar-size") %>
-  </div>
-  <div class="col-md-8">
-    <%= link_to_add_row fa_icon("plus", text: "Add a Subject"), f, :course_subjects, class: "btn btn-primary" do |btn| %>
-      <i class="fa fa-plus"></i>
-    <% end %>
+  <div class="col-md-12">
     <div class="course-subjects">
-      <%= f.fields_for :course_subjects do |cs| %>
-        <%= render "courses/course_subject", f: cs %>
-      <% end %>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <strong class="panel-title">Subject(s)</strong>
+          <%= link_to_add_row fa_icon("plus-circle", text: ""), f, :course_subjects, class: "btn btn-add-task" %>
+        </div>
+        <div class="panel-body">
+          <%= f.fields_for :course_subjects do |cs| %>
+            <%= render "courses/course_subject", f: cs %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
+
   <div class="col-md-3 col-md-offset-4 form-group">
     <%= f.submit "Submit", class: "form-control btn btn-success" %>
   </div>

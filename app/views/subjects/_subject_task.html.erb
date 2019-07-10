@@ -1,6 +1,6 @@
-<div class="subject">
+<div class="row task">
   <div class="col-md-11">
-    <%= f.select :subject_id, @subjects.collect {|sub| [sub.name, sub.id] }, {}, {class: "form-control select-subject"} %>
+    <%= f.select :task_id, @tasks.collect {|sub| [sub.name, sub.id] }, {}, {class: "form-control select-task"} %>
   </div>
   <div class="col-md-1 no-padding">
     <%= f.hidden_field :_destroy %>

@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
-    @course.course_subjects.new
+    @course.course_subjects.build
 
     @subjects = Subject.newest
   end
