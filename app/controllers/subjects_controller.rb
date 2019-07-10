@@ -8,6 +8,8 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new
+    @subject.subject_tasks.build
+    @tasks = Task.newest
   end
 
   def create
@@ -20,7 +22,9 @@ class SubjectsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @tasks = Task.newest
+  end
 
   def update
     if @subject.update_attributes subject_params
@@ -42,7 +46,7 @@ class SubjectsController < ApplicationController
   private
 
   def subject_params
-    params.require(:subject).permit :name, :description, :picture
+    params.require(:subject).permit :name, :description, :picture, subject_tasks_attributes: [:id, :subject_id, :task_id, :_destroy]
   end
 
   def load_subject

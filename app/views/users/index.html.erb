@@ -18,7 +18,7 @@
       <tbody>
       <% @users.each_with_index do |user, index| %>
         <tr id="data-row-id-<%= user.id %>">
-          <td scope="row"><strong><%= index + 1 %></strong></td>
+          <td scope="row"><strong><%= index_number index, params[:page] %></strong></td>
           <td>
             <% if user.avatar.present? %>
               <%= link_to image_tag(user.avatar.thumb.url, alt: user.fullname,

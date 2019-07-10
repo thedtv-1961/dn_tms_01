@@ -4,11 +4,11 @@ class PictureUploader < CarrierWave::Uploader::Base
   storage :file
 
   process resize_to_limit: [Settings.minimagick_width,
-                            Settings.minimagick_height]
+    Settings.minimagick_height]
 
   version :thumb do
     process resize_to_fill: [Settings.minimagick_width_thumb,
-                             Settings.minimagick_height_thumb]
+      Settings.minimagick_height_thumb]
   end
 
   def store_dir
@@ -20,6 +20,6 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    Settings.images_types
   end
 end

@@ -17,16 +17,10 @@
       <tbody>
       <% @subjects.each_with_index do |subject, index| %>
         <tr id="data-row-id-<%= subject.id %>">
-          <td scope="row"><strong><%= index + 1 %></strong></td>
+          <td scope="row"><strong><%= index_number index, params[:page] %></strong></td>
           <td>
-            <% if subject.picture %>
-              <%= link_to image_tag(subject.picture.thumb.url, alt: subject.name,
-                class: "img-circle avatar-size"), edit_subject_path(subject) %>
-            <% else %>
-              <%= link_to image_tag(Settings.avatar_default,
-                alt: t("messages.no_picture"), class: "img-circle avatar-size"),
-                edit_subject_path(subject) %>
-            <% end %>
+            <%= link_to image_tag(subject.picture.url, alt: subject.name,
+              class: "img-circle avatar-size"), edit_subject_path(subject) %>
           </td>
           <td><%= link_to subject.name, edit_subject_path(subject) %></td>
           <td>

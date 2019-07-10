@@ -13,3 +13,4 @@ per_page_default: 10
 avatar_default: "user.png"
 duration_minimun: 1
 duration_maximum: 100
+images_types: ["jpg", "jpeg", "gif", "png"]
