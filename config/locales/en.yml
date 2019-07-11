@@ -80,3 +80,11 @@ en:
       hour: "Hour"
       day: "Day"
       month: "Moth"
+  activerecord:
+    errors:
+      models:
+        course:
+          attributes:
+            course_subjects:
+              course_subjects_too_short: "Course should have at least %{count} Subject(s)"
+              course_subjects_dublicate_subject: "Subject must be unique"

@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit;
+  def edit
     @course = Course.find_by id: params[:id]
     @subjects = Subject.newest
   end

@@ -15,7 +15,7 @@ module ApplicationHelper
       render association.to_s.singularize, f: builder
     end
     link_to name, "", class: "add_fields " + args[:class],
-            data: {id: id, fields: fields.gsub("\n", "")}
+      data: {id: id, fields: fields.gsub("\n", "")}
   end
 
   def index_number index, page

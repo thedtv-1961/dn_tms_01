@@ -17,6 +17,10 @@ class Course < ApplicationRecord
       greater_than_or_equal_to: Settings.duration_minimun,
       less_than_or_equal_to: Settings.duration_maximum
     }
+  validate do
+    check_number_of_course_subject
+    check_duplicate_of_course_subject
+  end
 
   mount_uploader :picture, PictureUploader
 
@@ -26,6 +30,29 @@ class Course < ApplicationRecord
     def duration_types_i18n
       Hash[Course.duration_types
         .map{|k, v| [I18n.t("course.duration_type.#{k}"), v]}]
+    end
+  end
+
+  private
+
+  def course_subject_count_valid?
+    course_subjects.reject(&:marked_for_destruction?).count >= 1
+  end
+
+  def course_subject_duplicate_valid?
+    course_subjects.group_by {|x| x.subject_id}.count == course_subjects.length
+  end
+
+  def check_number_of_course_subject
+    unless course_subject_count_valid?
+      errors.add(:course_subjects, :course_subjects_too_short, :count => 1)
+    end
+  end
+
+  def check_duplicate_of_course_subject
+    return unless course_subjects.present?
+    unless course_subject_duplicate_valid?
+      errors.add(:course_subjects, :course_subjects_dublicate_subject)
     end
   end
 end

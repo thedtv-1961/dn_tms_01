@@ -12,18 +12,21 @@
   <div class="col-md-12">
     <label>Course</label>
     <%= f.text_field :name, class: "form-control" %>
+    <%= display_error :name %>
   </div>
   <div class="col-md-6">
-    <label for="">Duration :</label>
+    <label for="">Duration</label>
     <%= f.select :duration_type, Course.duration_types_i18n, {}, {class: "form-control"} %>
   </div>
   <div class="col-md-6">
-    <label for="">Duration :</label>
+    <label for="">Duration Type</label>
     <%= f.text_field :duration, class: "form-control", type: "number" %>
+    <%= display_error :duration %>
   </div>
   <div class="col-md-12">
     <label>Description</label>
     <%= f.text_area :description, cols: 30, rows: 4, class: "form-control" %>
+    <%= display_error :description %>
   </div>
   <div class="col-md-12">
     <div class="course-subjects">
@@ -33,9 +36,11 @@
           <%= link_to_add_row fa_icon("plus-circle", text: ""), f, :course_subjects, class: "btn btn-add-task" %>
         </div>
         <div class="panel-body">
+          <%= display_error :course_subjects, "" %>
           <%= f.fields_for :course_subjects do |cs| %>
             <%= render "courses/course_subject", f: cs %>
           <% end %>
+
         </div>
       </div>
     </div>

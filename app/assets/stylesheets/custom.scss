@@ -1,11 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-.navbar{
-  margin-bottom : 0px;
+
+.navbar {
+  margin-bottom: 0px;
 }
+
 .logo {
-  witdh : 100px !important;
+  witdh: 100px !important;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -19,13 +22,16 @@
   padding: 15px;
   margin: 0 auto;
 }
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
+
 .form-signin .checkbox {
   font-weight: 400;
 }
+
 .form-signin .form-control {
   position: relative;
   -webkit-box-sizing: border-box;
@@ -35,14 +41,17 @@
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
@@ -55,15 +64,17 @@ table.verticalalign tbody tr td {
 }
 
 /* avatar image */
-.avatar-size{
+.avatar-size {
   width: 100px;
   height: 100px;
 }
-.avatar-update-size{
+
+.avatar-update-size {
   width: 100px;
   height: 100px;
 }
-.no-padding{
+
+.no-padding {
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -125,14 +136,17 @@ table.verticalalign tbody tr td {
     }
   }
 }
-.remove_record{
+
+.remove_record {
   color: #ad0808;
   position: absolute;
   top: 3px;
-  &:hover{
+
+  &:hover {
     color: #780909;
   }
 }
-.field_with_errors .form-control{
-  
+
+span.error_message {
+  color: #a94442;
 }
