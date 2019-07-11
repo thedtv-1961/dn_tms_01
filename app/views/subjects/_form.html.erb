@@ -1,0 +1,44 @@
+<%= form_for @subject do |f| %>
+  <%= render "layouts/shared/error_message", object: f.object %>
+  <div class="image-upload col-md-2 col-md-offset-4">
+    <div class="image-edit">
+      <%= f.file_field :picture, class: "form-control", accept: Settings.images_types.collect {|type| ".#{type},"} %>
+      <label for="subject_picture"></label>
+    </div>
+    <div class="picture-preview">
+      <div id="picture-preview" style="background-image: url('<%= f.object.picture.url %>')">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="col-md-12">
+    <%= f.label :description %>
+    <%= f.text_area :description, cols: 30, rows: 4, class: "form-control" %>
+  </div>
+
+  <div class="col-md-12">
+    <div class="subject-tasks">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <strong class="panel-title">Task(s)</strong>
+          <%= link_to_add_row fa_icon("plus-circle", text: ""), f, :subject_tasks, class: "btn btn-add-task" %>
+        </div>
+        <div class="panel-body">
+          <%= f.fields_for :subject_tasks do |st| %>
+            <%= render "subjects/subject_task", f: st %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-md-offset-4 form-group">
+    <%= f.submit "Submit", class: "form-control btn btn-success" %>
+  </div>
+<% end %>
+

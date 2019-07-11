@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   scope :supervisor do
     resources :users
+    resources :subjects, except: :show
+    resources :courses, except: :show
   end
 end
