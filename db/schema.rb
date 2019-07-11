@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   end
 
   create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.text "description"
-    t.integer "duration", null: false
+    t.integer "duration"
     t.integer "duration_type", default: 0
     t.string "picture"
     t.datetime "created_at", null: false
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   end
 
   create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.text "description"
     t.string "picture"
     t.datetime "created_at", null: false
@@ -77,18 +77,18 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "id_subject"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "password_digest", null: false
+    t.string "email"
+    t.string "password_digest"
     t.integer "role", default: 0
-    t.string "fullname", null: false
-    t.date "birthday", null: false
+    t.string "fullname"
+    t.date "birthday"
     t.integer "gender", default: 1
     t.string "avatar"
     t.datetime "created_at", null: false
