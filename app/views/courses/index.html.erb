@@ -5,12 +5,13 @@
     <table class="table table-striped verticalalign">
       <h3><%= t "page.course_list" %></h3>
       <div id="showmsg"></div>
-      <%= link_to t("page.course_create"), new_course_path, data: { turbolinks: false } , class: "btn btn-success" %>
+      <%= link_to fa_icon("plus", text: t("page.course_create")), new_course_path, data: { turbolinks: false } , class: "btn btn-success" %>
       <thead>
       <tr>
         <th><%= t "table.column.order" %></th>
         <th><%= t "table.column.picture" %></th>
         <th><%= t "table.column.name" %></th>
+        <th><%= t "table.column.status" %></th>
         <th><%= t "table.column.action" %></th>
       </tr>
       </thead>
@@ -23,6 +24,9 @@
             class: "img-circle avatar-size"), edit_course_path(course) %>
           </td>
           <td><%= link_to course.name, edit_course_path(course), data: { turbolinks: false } %></td>
+          <td>
+            <span class="label label-<%= fill_course_status_color course %>"><%= Course.status_types.key(course.status).upcase %></span>
+          </td>
           <td>
             <%= link_to edit_course_path(course), data: { turbolinks: false }, class: "btn btn-warning" do %>
               <i class="fa fa-edit"></i>

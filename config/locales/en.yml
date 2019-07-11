@@ -13,6 +13,7 @@ en:
       action: "Action"
       name: "Name"
       picture: "Picture"
+      status: "Status"
   page:
     home: "Home"
     courses: "All Course"
@@ -63,11 +64,12 @@ en:
         name: "Name"
         description: "Description"
         picture: "Picture"
+      course:
+        course_subjects: "Subject(s)"
     submit:
-      user:
-        create: "Create an User"
-      task:
-        create: "Create a Task"
+      create: "Create"
+      submit: "Save"
+      update: "Update"
   user:
     role:
       trainee: "Trainee"
@@ -91,4 +93,4 @@ en:
           attributes:
             course_subjects:
               course_subjects_too_short: "Course should have at least %{count} Subject(s)"
-              course_subjects_dublicate_subject: "Subject must be unique"
+              course_subjects_duplicate_subject: "Subject must be unique"

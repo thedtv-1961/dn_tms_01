@@ -1,13 +1,18 @@
 class Course < ApplicationRecord
+
+  # Enums
   enum status_types: {init: 0, start: 1, finish: 2}
   enum duration_types: {hour: 0, day: 1, month: 2}
 
+  # Relationships
   has_many :course_users, dependent: :destroy
   has_many :course_subjects, dependent: :destroy
 
+  # Nested attribute
   accepts_nested_attributes_for :course_users, allow_destroy: true
   accepts_nested_attributes_for :course_subjects, allow_destroy: true
 
+  # Validates
   validates :name, presence: true,
     length: {maximum: Settings.name_length_maximum}
   validates :description, presence: true,
@@ -18,13 +23,17 @@ class Course < ApplicationRecord
       greater_than_or_equal_to: Settings.duration_minimun,
       less_than_or_equal_to: Settings.duration_maximum
     }
+
+  # Custom validates
   validate do
     check_number_of_course_subject
     check_duplicate_of_course_subject
   end
 
+  # Uploader
   mount_uploader :picture, PictureUploader
 
+  # Query options
   scope :newest, ->{order id: :desc}
 
   class << self
@@ -34,7 +43,7 @@ class Course < ApplicationRecord
     end
 
     def status_types_i18n
-      Hash[Course.duration_types
+      Hash[Course.status_types
         .map{|k, v| [I18n.t("course.status_types.#{k}"), v]}]
     end
   end
@@ -58,7 +67,7 @@ class Course < ApplicationRecord
   def check_duplicate_of_course_subject
     return unless course_subjects.present?
     unless course_subject_duplicate_valid?
-      errors.add(:course_subjects, :course_subjects_dublicate_subject)
+      errors.add(:course_subjects, :course_subjects_duplicate_subject)
     end
   end
 end

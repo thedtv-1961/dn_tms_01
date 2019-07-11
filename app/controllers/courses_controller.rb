@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :load_course, only: %i(edit update destroy)
+  before_action :load_subjects, except: %i(index destroy show)
 
   def index
     @courses = Course.newest.paginate page: params[:page],
@@ -9,12 +10,9 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     @course.course_subjects.build
-
-    @subjects = Subject.newest
   end
 
   def create
-    @subjects = Subject.newest
     @course = Course.new course_params
     if @course.save
       flash[:success] = t "messages.save_success"
@@ -26,7 +24,6 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find_by id: params[:id]
-    @subjects = Subject.newest
   end
 
   def update
@@ -50,7 +47,7 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit :name, :description, :duration,
-      :duration_type, :picture,
+      :duration_type, :picture, :status,
       course_subjects_attributes: [:id, :course_id, :subject_id,
       :status, :_destroy]
   end
@@ -58,5 +55,9 @@ class CoursesController < ApplicationController
   def load_course
     @course = Course.find_by id: params[:id]
     redirect_to courses_path unless @course
+  end
+
+  def load_subjects
+    @subjects = Subject.newest
   end
 end
