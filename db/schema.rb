@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   create_table "course_subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "course_id"
     t.integer "subject_id"
-    t.integer "status", 0
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id", "subject_id"], name: "index_course_subjects_on_course_id_and_subject_id", unique: true
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   create_table "course_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
-    t.integer "role", 0
+    t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_course_users_on_course_id"
@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
     t.string "name", null: false
     t.text "description"
     t.integer "duration", null: false
-    t.integer "duration_type", 0
+    t.integer "duration_type", default: 0
     t.string "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", 0
+    t.integer "status", default: 0
     t.datetime "date_end"
     t.datetime "date_start"
   end
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   create_table "subject_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "course_user_id"
     t.integer "subject_id"
-    t.integer "status", 0
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_user_id", "subject_id"], name: "index_subject_users_on_course_user_id_and_subject_id", unique: true
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 2019_07_11_041225) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.integer "role", 0
+    t.integer "role", default: 0
     t.string "fullname", null: false
     t.date "birthday", null: false
-    t.integer "gender", 1
+    t.integer "gender", default: 1
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
