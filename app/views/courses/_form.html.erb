@@ -35,22 +35,54 @@
     <%= f.text_area :description, cols: 30, rows: 4, class: "form-control" %>
     <%= display_error :description %>
   </div>
-  <div class="col-md-12">
-    <div class="course-subjects">
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <strong class="panel-title">
-            <%= t "helpers.label.course.course_subjects" %>
-          </strong>
-          <%= link_to_add_row fa_icon("plus-circle", text: ""), f,
-            :course_subjects, class: "btn btn-add-task" %>
-        </div>
-        <div class="panel-body">
+  <div class="col-md-12 course-subjects ">
+    <ul class="nav nav-pills">
+      <li class="active">
+        <a data-toggle="pill" href="#subject" class="<%= highlight_error_tab :course_subjects %>">
+          <%= t "helpers.label.course.course_subjects" %>
+        </a>
+      </li>
+      <li><a data-toggle="pill" href="#menu1" class="<%= highlight_error_tab :course_subjects %>">
+        <%= t "helpers.label.course.course_trainee" %>
+      </a></li>
+      <li><a data-toggle="pill" href="#menu2" class="<%= highlight_error_tab :course_subjects %>">
+        <%= t "helpers.label.course.course_supper" %>
+      </a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="subject" class="tab-pane fade in active">
+        <%= link_to_add_row fa_icon("plus-circle", text: ""), f,
+          :course_subjects, class: "btn btn-add-task" %>
+        <div class="subject-body">
           <%= display_error :course_subjects, "" %>
           <%= f.fields_for :course_subjects do |cs| %>
             <%= render "courses/course_subject", f: cs %>
           <% end %>
         </div>
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <table border="1">
+          <thead>
+          <th>Avatar</th>
+          <th>Ho ten</th>
+          <th>email</th>
+          <th>Gioi tinh</th>
+          <th>ngay sinh</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <h3>Menu 2</h3>
+        <p>Some content in menu 2.</p>
       </div>
     </div>
   </div>

@@ -65,7 +65,9 @@ en:
         description: "Description"
         picture: "Picture"
       course:
-        course_subjects: "Subject(s)"
+        course_subjects: "Subject"
+        course_trainee: "Trainee"
+        course_supper: "Suppervisor"
     submit:
       create: "Create"
       submit: "Save"

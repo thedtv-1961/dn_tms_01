@@ -1,7 +1,7 @@
 module CoursesHelper
 
   # Display error message on input field
-  def display_error(field, custom_field_name = nil)
+  def display_error field, custom_field_name = nil
     return unless @course.errors[field].present?
     name = custom_field_name ? custom_field_name : field.to_s.titlecase
     raw "<span class=\"error_message\">  #{name}
@@ -26,5 +26,10 @@ module CoursesHelper
     else
       "default"
     end
+  end
+
+  # Highlight error tab
+  def highlight_error_tab field
+    "error-tab" if @course.errors[field].present?
   end
 end

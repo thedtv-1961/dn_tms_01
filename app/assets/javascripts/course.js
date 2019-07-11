@@ -5,7 +5,7 @@ $(document).ready(function() {
     let regexp, time;
     time = new Date().getTime();
     regexp = new RegExp($(this).data('id'), 'g');
-    $('.course-subjects .panel-body').append($(this).data('fields').replace(regexp, time));
+    $('.course-subjects .subject-body').append($(this).data('fields').replace(regexp, time));
     $('select.select-subject').select2();
     return event.preventDefault();
   });
