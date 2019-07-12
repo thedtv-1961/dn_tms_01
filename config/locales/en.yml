@@ -26,6 +26,7 @@ en:
     course_create: "Create new Course"
     user_edit: "Edit an User"
     course_edit: "Edit a Course"
+    assign_trainee: "Assign Trainee"
     subject_edit: "Edit an Subject"
     User_list: "User List"
     task_list: "Task List"

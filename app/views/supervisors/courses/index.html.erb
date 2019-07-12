@@ -31,6 +31,9 @@
             <%= link_to edit_supervisors_course_path(course), data: { turbolinks: false }, class: "btn btn-warning" do %>
               <i class="fa fa-edit"></i>
             <% end %>
+            <%= link_to edit_supervisors_trainee_path(course), data: { turbolinks: false }, class: "btn btn-warning" do %>
+              <i class="fa fa-phone"></i>
+            <% end %>
             <button href="#myModal" class="btn btn-danger btn-load-modal"
               data-id="<%= course.id %>" data-toggle="modal">
               <span class="fa fa-remove"></span>
@@ -70,4 +73,4 @@
   </div>
 </div>
 
-<%= javascript_include_tag "ajax_helper" %>
+<%= javascript_include_tag "supervisors/ajax_helper" %>

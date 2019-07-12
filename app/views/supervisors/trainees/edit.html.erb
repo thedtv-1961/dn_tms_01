@@ -1,0 +1,31 @@
+<% provide :title, t("page.assign_trainee") %>
+<%= stylesheet_link_tag "supervisors/trainees" %>
+
+<div class="row">
+  <h1 class="text-center"><%= t("page.assign_trainee") %></h1>
+  <div class="col-md-6 col-md-offset-3 course-users">
+    <%= form_for [:supervisors, @course], url: supervisors_trainee_path(@course) do |f| %>
+      <%= link_to_add_row fa_icon("plus-circle", text: "Add new User"), f, :course_users, class: "btn btn-add-task" %>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>ho ten</th>
+            <th>email</th>
+            <th>gioi tinh</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="trainees">
+        <%= f.fields_for :course_users do |course_user| %>
+          <%= render "supervisors/trainees/course_user", f: course_user %>
+        <% end %>
+        </tbody>
+      </table>
+      <%= f.submit class: "form-control btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_include_tag "supervisors/custom.js" %>
+<%= javascript_include_tag "supervisors/trainees.js" %>
