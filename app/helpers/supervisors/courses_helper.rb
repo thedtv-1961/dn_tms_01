@@ -1,4 +1,4 @@
-module CoursesHelper
+module Supervisors::CoursesHelper
   # Display error message on input field
   def display_error field, custom_field_name = nil
     return unless @course.errors[field].present?

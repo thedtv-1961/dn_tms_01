@@ -74,7 +74,7 @@ en:
   user:
     role:
       trainee: "Trainee"
-      suppervisor: "Suppervisor"
+      supervisor: "Supervisor"
     gender:
       male: "Male"
       female: "Female"

@@ -7,9 +7,7 @@ class Course < ApplicationRecord
   has_many :course_users, dependent: :destroy
   has_many :course_subjects, dependent: :destroy
 
-  scope :with_shipped_device, -> {
-    joins(:course_users).where(id: 1)
-  }
+  scope :with_shipped_device, ->{joins(:course_users).where(id: 1)}
 
   # Nested attribute
   accepts_nested_attributes_for :course_users, allow_destroy: true

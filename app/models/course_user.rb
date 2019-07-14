@@ -1,5 +1,5 @@
 class CourseUser < ApplicationRecord
-  enum role_types: {trainee: 0, suppervisor: 1}
+  enum role_types: {trainee: 0, supervisor: 1}
 
   belongs_to :user
   belongs_to :course

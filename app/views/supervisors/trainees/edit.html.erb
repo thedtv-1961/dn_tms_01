@@ -3,27 +3,80 @@
 
 <div class="row">
   <h1 class="text-center"><%= t("page.assign_trainee") %></h1>
-  <div class="col-md-6 col-md-offset-3 course-users">
-    <%= form_for [:supervisors, @course], url: supervisors_trainee_path(@course) do |f| %>
-      <%= link_to_add_row fa_icon("plus-circle", text: "Add new User"), f, :course_users, class: "btn btn-add-task" %>
-      <table border="1">
-        <thead>
+  <%= form_for [:supervisors, @course],
+    url: supervisors_trainee_path(@course) do |f| %>
+    <%= link_to "them moi", "#", class: "btn btn-add-task",
+      data: {toggle: "modal", target: ".bs-example-modal-lg"} %>
+    <%= f.submit "Luu lai" ,class: "btn btn-success" %>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>ho ten</th>
+        <th>email</th>
+        <th>ngay sinh</th>
+        <th>gioi tinh</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody class="trainees-data-tables">
+      <%= f.fields_for :course_users do |course_user| %>
+        <%= render "supervisors/trainees/course_user", f: course_user %>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<div class="modal fade bs-example-modal-lg modal-users" tabindex="-1"
+     role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table users table-bordered table-striped">
+          <thead>
           <tr>
-            <th>Avatar</th>
+            <th class="no-sort">
+              <input type="checkbox">
+            </th>
             <th>ho ten</th>
             <th>email</th>
-            <th>gioi tinh</th>
-            <th></th>
+            <th>ngay sinh</th>
+            <th class="no-sort">gioi tinh</th>
           </tr>
-        </thead>
-        <tbody class="trainees">
-        <%= f.fields_for :course_users do |course_user| %>
-          <%= render "supervisors/trainees/course_user", f: course_user %>
-        <% end %>
-        </tbody>
-      </table>
-      <%= f.submit class: "form-control btn btn-success" %>
-    <% end %>
+          </thead>
+          <tbody>
+          <% @users.each do |user| %>
+            <tr data-id="<%= user.id %>">
+              <td>
+                <%= check_box_tag nil, user.id, false, class:"chk-user",
+                  data:{avatar: user.avatar.url, fullname: user.fullname,
+                    email: user.email, birthday: user.birthday.to_s,
+                    gender: user.gender} %>
+              </td>
+              <td><%= user.fullname %></td>
+              <td><%= user.email %></td>
+              <td><%= user.birthday %></td>
+              <td class="gender-col">
+                <i class="fa <%= display_gender user %>"></i></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Them moi", "#", class: "btn btn-warning btn-assign",
+          data: {dismiss: "modal"} %>
+        <%= link_to "Close", "#", class: "btn btn-default",
+          data: {dismiss: "modal"} %>
+      </div>
+    </div>
   </div>
 </div>
 
