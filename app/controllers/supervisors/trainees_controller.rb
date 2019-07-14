@@ -1,15 +1,13 @@
 class Supervisors::TraineesController < ApplicationController
+
+  before_action :load_users, only: %i(edit update)
+  before_action :load_course, only: %i(edit update)
+
   def show; end
 
-  def edit
-    @users = User.trainees.newest
-    @course = Course.find_by id: params[:id]
-    # @course.course_users.build
-  end
+  def edit; end
 
   def update
-    @course = Course.find_by id: params[:id]
-    @users = User.trainees.newest
     if @course.update_attributes course_user_params
       redirect_to supervisors_courses_path
     else
@@ -23,4 +21,13 @@ class Supervisors::TraineesController < ApplicationController
     params.require(:course).permit :id, course_users_attributes:
       [:id, :course_id, :user_id, :_destroy]
   end
+
+  def load_users
+    @users = User.trainees.newest
+  end
+
+  def load_course
+    @course = Course.find_by id: params[:id]
+  end
+
 end

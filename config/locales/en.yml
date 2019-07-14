@@ -14,6 +14,8 @@ en:
       name: "Name"
       picture: "Picture"
       status: "Status"
+      birthday: "Birthday"
+      gender: "Gender"
   page:
     home: "Home"
     courses: "All Course"
@@ -71,6 +73,9 @@ en:
       create: "Create"
       submit: "Save"
       update: "Update"
+    button:
+      close: "Close"
+      assign: "Assign"
   user:
     role:
       trainee: "Trainee"

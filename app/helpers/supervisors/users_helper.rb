@@ -1,2 +1,0 @@
-module Supervisors::UsersHelper
-end
