@@ -61,7 +61,7 @@ $(document).ready(function () {
   $(window).on('shown.bs.modal', function () {
     if ($('table.users tbody tr').length > 0) {
       // hide rows assigned
-      $('table.users tbody tr').css('display', '');
+      $('table.users tbody tr').css('display', 'table-row');
 
       $('.trainees-data-tables tr[style*="display: table-row"]')
         .each(function (index, data) {
@@ -82,6 +82,20 @@ $(document).ready(function () {
 
       // uncheck checkbox
       $('table.users td input[type="checkbox"]').attr('checked', false);
+    }
+  });
+
+  $('.chk-all').change(function (event) {
+    if(this.checked){
+    //  display: table-row
+      $('.users tr[style="display: table-row"] .chk-user').each(function (index, data) {
+        this.checked = true;
+      });
+    }
+    else{
+      $('.users tr .chk-user').each(function (index, data) {
+        this.checked = false;
+      });
     }
   });
 

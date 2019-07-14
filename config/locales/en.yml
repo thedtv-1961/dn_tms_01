@@ -50,6 +50,9 @@ en:
   ui_control_text_js:
     delete: "Delete"
     cancel: "Cancel"
+  date:
+    formats:
+      default: "%d-%m-%Y"
   helpers:
     label:
       user:

@@ -57,7 +57,7 @@
           </thead>
           <tbody>
           <% @users.each do |user| %>
-            <tr data-id="<%= user.id %>">
+            <tr data-id="<%= user.id %>" style="display: table-row">
               <td>
                 <%= check_box_tag nil, user.id, false, class:"chk-user",
                   data:{avatar: user.avatar.url, fullname: user.fullname,
@@ -66,7 +66,7 @@
               </td>
               <td><%= user.fullname %></td>
               <td><%= user.email %></td>
-              <td><%= user.birthday %></td>
+              <td><%= l user.birthday, format: :default %></td>
               <td class="gender-col">
                 <i class="fa <%= display_gender user %>"></i></td>
             </tr>
