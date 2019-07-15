@@ -18,7 +18,7 @@
   </div>
   <div class="col-md-6">
     <%= f.label :duration_type %>
-    <%= f.select :duration_type, Course.duration_types_i18n, {},
+    <%= f.select :duration_type, Course.duration_type_i18n, {},
       {class: "form-control"} %>
   </div>
   <div class="col-md-6">
@@ -28,7 +28,7 @@
   </div>
   <div class="col-md-12">
     <%= f.label :status %>
-    <%= f.select :status, Course.status_types_i18n, {},
+    <%= f.select :status, Course.status_i18n, {},
       {class: "form-control", disabled: active_course_status} %>
   </div>
   <div class="col-md-12">

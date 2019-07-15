@@ -1,13 +1,11 @@
 class Course < ApplicationRecord
   # Enums
-  enum status_types: {init: 0, start: 1, finish: 2}
+  enum status: {init: 0, start: 1, finish: 2}
   enum duration_types: {hour: 0, day: 1, month: 2}
 
   # Relationships
   has_many :course_users, dependent: :destroy
   has_many :course_subjects, dependent: :destroy
-
-  scope :with_shipped_device, ->{joins(:course_users).where(id: 1)}
 
   # Nested attribute
   accepts_nested_attributes_for :course_users, allow_destroy: true
@@ -39,13 +37,13 @@ class Course < ApplicationRecord
 
   class << self
     def duration_types_i18n
-      Hash[Course.duration_types
-                 .map{|k, v| [I18n.t("course.duration_type.#{k}"), v]}]
+      Hash[
+        Course.duration_types.map{|k| [I18n.t("course.duration_type.#{k}"), k]}
+      ]
     end
 
-    def status_types_i18n
-      Hash[Course.status_types
-                 .map{|k, v| [I18n.t("course.status_types.#{k}"), v]}]
+    def status_i18n
+      Hash[Course.statuses.map{|k| [I18n.t("course.status.#{k}"), k]}]
     end
   end
 
@@ -60,13 +58,12 @@ class Course < ApplicationRecord
   end
 
   def check_number_of_course_subject
-    errors.add(:course_subjects, :course_subjects_too_short, count: 1) unless
-      course_subject_count_valid?
+    return if course_subject_count_valid?
+    errors.add(:course_subjects, :course_subjects_too_short, count: 1)
   end
 
   def check_duplicate_of_course_subject
-    return unless course_subjects.present?
-    errors.add(:course_subjects, :course_subjects_duplicate_subject) unless
-      course_subject_duplicate_valid?
+    return if course_subjects.present? && course_subject_duplicate_valid?
+    errors.add(:course_subjects, :course_subjects_duplicate_subject)
   end
 end
