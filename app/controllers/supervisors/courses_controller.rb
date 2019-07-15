@@ -52,7 +52,9 @@ class Supervisors::CoursesController < ApplicationController
 
   def load_course
     @course = Course.find_by id: params[:id]
-    redirect_to supervisors_courses_path unless @course
+    return if @course
+    flash[:warning] = t "messages.course_not_found"
+    redirect_to supervisors_courses_path
   end
 
   def load_subjects

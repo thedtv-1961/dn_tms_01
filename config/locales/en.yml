@@ -44,6 +44,7 @@ en:
     no_avatar: "No Avatar"
     no_picture: "No Picture"
     delete_msg: "Do you really want to delete this records? This process cannot be undone."
+    course_not_found: "This Course doesn't exists"
     error:
       one: "The form contains %{count} error."
       other: "The form contains %{count} errors."
@@ -91,7 +92,7 @@ en:
       hour: "Hour"
       day: "Day"
       month: "Moth"
-    status_types:
+    status:
       init: "Init"
       start: "Start"
       finish: "Finish"

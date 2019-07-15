@@ -72,7 +72,7 @@ $(document).ready(function () {
       // fix width headers
       let columns_count = $('.dataTables_scrollHead th').length;
       $('.dataTables_scrollHead th').css('padding', '10px 0px');
-      $('table.users tbody tr:nth-child(1) td')
+      $('table.users tbody tr[style="display: table-row"]:first td')
         .each(function (index, data) {
           if (index < columns_count - 1) {
             $('.dataTables_scrollHead th:nth-child('
@@ -88,7 +88,8 @@ $(document).ready(function () {
   $('.chk-all').change(function (event) {
     if(this.checked){
     //  display: table-row
-      $('.users tr[style="display: table-row"] .chk-user').each(function (index, data) {
+      $('.users tr[style="display: table-row"] .chk-user')
+        .each(function (index, data) {
         this.checked = true;
       });
     }
