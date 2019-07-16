@@ -6,6 +6,7 @@ class Course < ApplicationRecord
   # Relationships
   has_many :course_users, dependent: :destroy
   has_many :course_subjects, dependent: :destroy
+  has_many :users, through: :course_users
 
   # Nested attribute
   accepts_nested_attributes_for :course_users, allow_destroy: true
@@ -25,9 +26,16 @@ class Course < ApplicationRecord
 
   # Custom validates
   validate do
-    check_dates_vaid
     check_number_of_course_subject
     check_duplicate_of_course_subject
+  end
+  before_validation(on: :create) do
+    check_start_valid
+    check_end_valid
+  end
+
+  before_validation(on: :update) do
+    check_end_valid
   end
 
   # Uploader
@@ -50,12 +58,14 @@ class Course < ApplicationRecord
 
   private
 
-  def check_dates_vaid
-    if date_start < Date.today
-      errors.add(:date_start, :date_start_must_be_large_than_today)
-    elsif date_end < date_start
-      errors.add(:date_end, :date_end_must_be_equal_large_than_date_start)
-    end
+  def check_start_valid
+    return unless date_start < Date.today && date_start < date_end
+    errors.add(:date_start, :date_start_must_be_large_than_today)
+  end
+
+  def check_end_valid
+    return unless date_end < date_start
+    errors.add(:date_end, :date_end_must_be_equal_large_than_date_start)
   end
 
   def course_subject_count_valid?
