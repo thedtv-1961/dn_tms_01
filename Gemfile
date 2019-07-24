@@ -45,6 +45,7 @@ group :test do
   gem "database_cleaner"
   gem "faker", "1.9.4"
   gem "launchy"
+  gem "rails-controller-testing"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
